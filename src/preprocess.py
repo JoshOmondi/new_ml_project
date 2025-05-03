@@ -1,7 +1,16 @@
 import pandas as pd
 
 def preprocess_data(df):
-    df = df[df['horsepower'].notna()]  # Only drop rows with missing horsepower
-    df = df.drop("car_name", axis=1)
-    df = pd.get_dummies(df, columns=["origin"], prefix="origin")
+    """
+    Perform data preprocessing steps:
+    - Convert 'origin' to categorical variable.
+    - Normalize continuous features.
+    """
+    # Convert 'origin' to categorical (dummy encoding)
+    df = pd.get_dummies(df, columns=['origin'], drop_first=True)
+    
+    # Normalize continuous features
+    continuous_columns = ['mpg', 'displacement', 'horsepower', 'weight', 'acceleration']
+    df[continuous_columns] = df[continuous_columns].apply(lambda x: (x - x.mean()) / x.std())
+    
     return df
