@@ -1,5 +1,5 @@
 from src.preprocess import load_data, preprocess_data
-from src.train import train_and_evaluate
+from src.train import train_and_evaluate  # <- Now correctly imported
 import pandas as pd
 import os
 
@@ -21,7 +21,8 @@ def main():
     model, mse, y_test, y_pred = train_and_evaluate()
 
     # Step 3: Output results
-    print(f"Model Mean Squared Error (MSE): {mse}")
+    print(f"✅ Model trained successfully!")
+    print(f"📊 Model Mean Squared Error (MSE): {mse:.3f}")
 
 if __name__ == "__main__":
     main()
